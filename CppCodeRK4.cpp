@@ -5,8 +5,8 @@
 using namespace Rcpp; 
 
 #define dim 8
-#define dimIv 13
-#define dimOut 29
+#define dimIv 14
+#define dimOut 30
 
 //Note: All pieces of code beginning with a @ will be replaced by the required code by R before compiling
 //For instance @AddDim will be replaced by the dimension of the model
@@ -28,6 +28,7 @@ void Func(double t, double* y, double* parms, double* ydot, double* x, double** 
 
 x[2] = (parms[14] * (y[3] - parms[15]) + parms[7]) * y[0];
 x[3] = parms[1];
+x[13] = parms[0];
 ydot[0] = -parms[7] * y[0] + x[2];
 ydot[1] = -parms[8] * y[1] + x[2];
 x[6] = parms[9] * x[3];
@@ -45,8 +46,8 @@ x[10] = x[4] + y[7] + parms[13] * y[4] - x[9];
 ydot[4] = x[10] - y[5];
 x[11] = parms[4] + parms[5] * x[10] + parms[6] * y[4];
 x[12] = ydot[6] + parms[12] * y[1] - parms[13] * (y[2] + y[4]);
-ydot[5] = parms[16] * (x[11] - y[5]);
-ydot[7] = parms[16] * (x[12] - y[7]);
+ydot[5] = parms[17] * (x[11] - y[5]);
+ydot[7] = parms[18] * (x[12] - y[7]);
 }
 	
 Rcpp::NumericMatrix RK4(int nt, 
